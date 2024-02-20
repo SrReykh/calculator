@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
+# Calculator using React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+It's just a simple calculator web-site as a challenge for me, to learn React.
 
-Currently, two official plugins are available:
+### Want to test it?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Install <a href="https://nodejs.org/en" target="_blank">Node.js</a>
+2. Install <a href="https://git-scm.com/" target="_blank">Git</a>
 
-## Expanding the ESLint configuration
+Select a path in your device and use
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```console
+git clone https://github.com/SrReykh/calculator.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Now run:
+```console
+cd Calculator
+```
+
+Then:
+```console
+npm run dev
+```
+
+And finally just follow the server link on console
