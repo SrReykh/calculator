@@ -1,57 +1,64 @@
 import { useState } from "react";
 
-// tentando fazer funcionar operação básica com apenas um algarismo
-// inserir no front uma indicação da operação escolhida.
-
-
 const Calculator = () => {
-  const [valueNow, setValueNow] = useState(0);
-
-  //   const [firstValues, setFirstValues] = useState([]);
-
-  const [firstNumber, setFirstNumber] = useState(-1);
-  const [secondNumber, setSecondNumber] = useState(-1);
-
-  const [operatorMode, changeOperatorMode] = useState(0);
+  const [valueNow, setValueNow] = useState(""); // This value appear in the main input
+  const [firstValues, setFirstValues] = useState<number[]>([]); // Array of digits selected by any operator be selected
+  const [secondValues, setSecondValues] = useState<number[]>([]); // Array of digits after the operator is selected
+  const [operatorMode, changeOperatorMode] = useState(0); // Operator mode... 0 - Null, 1 - Addition...
 
   const OperatorModeChanger = (type: number) => {
     changeOperatorMode(type);
   };
 
   const handleClick = (value: number) => {
-    setValueNow(value);
-    if (operatorMode != 0) return setSecondNumber(value);
-    setFirstNumber(value);
+    if (operatorMode != 0) {
+      setValueNow(valueNow + value.toString());
+      setSecondValues([...secondValues, value]);
+      return;
+    }
+
+    setValueNow(valueNow + value.toString());
+    setFirstValues([...firstValues, value]);
   };
 
   const Result = () => {
-    let result;
+    if (firstValues.length == 0 && secondValues.length == -1)
+      return setValueNow("");
 
+    let firstValuesResult: string = "";
+    let secondValuesResult: string = "";
 
-    if (firstNumber == -1 && secondNumber == -1) return setValueNow(0);
+    firstValues.forEach((element) => {
+      firstValuesResult = firstValuesResult.concat(element.toString());
+    });
 
+    secondValues.forEach((element) => {
+      secondValuesResult = secondValuesResult.concat(element.toString());
+    });
+
+    let result: number;
     switch (operatorMode) {
       case 1:
-        result = firstNumber + secondNumber;
-        setValueNow(result);
+        result = parseInt(firstValuesResult) + parseInt(secondValuesResult);
+        setValueNow(result.toString());
         break;
       case 2:
-        result = firstNumber - secondNumber;
-        setValueNow(result);
+        result = parseInt(firstValuesResult) - parseInt(secondValuesResult);
+        setValueNow(result.toString());
         break;
       case 3:
-        result = firstNumber * secondNumber;
-        setValueNow(result);
+        result = parseInt(firstValuesResult) * parseInt(secondValuesResult);
+        setValueNow(result.toString());
+        break;
+      case 4:
+        result = parseInt(firstValuesResult) / parseInt(secondValuesResult);
+        setValueNow(result.toString());
         break;
     }
 
-    console.log(firstNumber);
-    console.log(secondNumber);
-    console.log(operatorMode);
-
     changeOperatorMode(0);
-    setFirstNumber(-1);
-    setSecondNumber(-1);
+    setFirstValues([]);
+    setSecondValues([]);
   };
 
   return (
@@ -67,9 +74,10 @@ const Calculator = () => {
           <button
             className="bg-green-500 rounded hover:opacity-90 font-bold"
             onClick={() => {
-              setValueNow(0);
-              setFirstNumber(-1);
-              setSecondNumber(-1);
+              setValueNow("");
+              setFirstValues([]);
+              setSecondValues([]);
+              OperatorModeChanger(0);
             }}
           >
             AC
@@ -78,7 +86,7 @@ const Calculator = () => {
             className="bg-green-500 rounded hover:opacity-90 font-bold"
             onClick={() => {
               OperatorModeChanger(1);
-              setValueNow(0);
+              setValueNow("");
             }}
           >
             +
@@ -87,7 +95,7 @@ const Calculator = () => {
             className="bg-green-500 rounded hover:opacity-90 font-bold"
             onClick={() => {
               OperatorModeChanger(2);
-              setValueNow(0);
+              setValueNow("");
             }}
           >
             -
@@ -96,7 +104,7 @@ const Calculator = () => {
             className="bg-green-500 rounded hover:opacity-90 font-bold"
             onClick={() => {
               OperatorModeChanger(3);
-              setValueNow(0);
+              setValueNow("");
             }}
           >
             *
@@ -128,10 +136,11 @@ const Calculator = () => {
           <button
             className="bg-green-500 rounded hover:opacity-90 font-bold"
             onClick={() => {
-              handleClick(0);
+              changeOperatorMode(4);
+              setValueNow("");
             }}
           >
-            0
+            ÷
           </button>
           <button
             className="bg-green-500 rounded hover:opacity-90 font-bold"
@@ -157,7 +166,12 @@ const Calculator = () => {
           >
             2
           </button>
-          <button className="bg-green-500 rounded hover:opacity-90 font-bold">
+          <button
+            className="bg-green-500 rounded hover:opacity-90 font-bold"
+            onClick={() => {
+              setValueNow("UNDER DEVELOPMENT");
+            }}
+          >
             .
           </button>
           <button
@@ -186,6 +200,14 @@ const Calculator = () => {
           </button>
           <button
             className="bg-green-500 rounded hover:opacity-90 font-bold"
+            onClick={() => handleClick(0)}
+          >
+            0
+          </button>
+        </div>
+        <div className=" flex justify-end">
+          <button
+            className="w-36 h-9 border-2 rounded bg-green-500 hover:opacity-90 font-bold"
             onClick={() => Result()}
           >
             =
