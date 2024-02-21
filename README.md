@@ -2,6 +2,8 @@
 
 It's just a simple calculator web-site as a challenge for me, to learn React.
 
+![Foto](https://github.com/SrReykh/calculator/blob/main/src/img/calculator.png)
+
 ### Want to test it?
 
 1. Install <a href="https://nodejs.org/en" target="_blank">Node.js</a>
@@ -14,11 +16,13 @@ git clone https://github.com/SrReykh/calculator.git
 ```
 
 Now run:
+
 ```console
 cd Calculator
 ```
 
 Then:
+
 ```console
 npm run dev
 ```
