@@ -18,10 +18,17 @@ git clone https://github.com/SrReykh/calculator.git
 Now run:
 
 ```console
-cd Calculator
+cd calculator
 ```
+Open your IDE and its console and type:
 
 Then:
+
+```console
+npm install 
+```
+
+Lastly type it in your console:
 
 ```console
 npm run dev
